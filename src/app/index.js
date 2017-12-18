@@ -1,16 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { render } from "react-dom";
+import { Provider } from "react-redux";
 
 
-export class App extends Component {
-  render() {
-    return (
-      <h1> Hello !!! </h1>
-    );
-  }
-}
+import App from "./containers/App";
+import store from "./store";
 
 render(
-  <App />,
-  window.document.getElementById("app")
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    window.document.getElementById('app')
 );
