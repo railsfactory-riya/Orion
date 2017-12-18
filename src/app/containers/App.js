@@ -1,33 +1,42 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { User } from "../components/User";
-import { Main } from "../components/Main";
-import { setName } from "../actions/userActions";
+import { UserDetails } from "../components/UserDetails";
+import { SignIn } from "../components/SignIn";
+import { setEmail, setPassword } from "../actions/UserActions";
 
 class App extends Component {
-    render() {
-        return (
-            <div className="container">
-                <Main signIn={() => this.props.setName("Anna")}/>
-                <User username={this.props.user.name}/>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="container">
+        <SignIn
+          clickSignIn={() => {
+            this.props.setEmail("Riya"),
+            this.props.setPassword("123riya")
+          }} />
+        <UserDetails
+          email={this.props.userDetails.email}
+          password={this.props.userDetails.password} />
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
-      user: state.user
+    userDetails: state.userDetails
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        setName: (name) => {
-            dispatch(setName(name));
-        }
-    };
+  return {
+    setEmail: (email) => {
+      dispatch(setEmail(email));
+    },
+    setPassword: (password) => {
+      dispatch(setPassword(password));
+    }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
