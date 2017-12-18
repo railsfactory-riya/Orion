@@ -1,15 +1,15 @@
-import React from "react";
-import {connect} from "react-redux";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import { User } from "../components/User";
 import { Main } from "../components/Main";
 import { setName } from "../actions/userActions";
 
-class App extends React.Component {
+class App extends Component {
     render() {
         return (
             <div className="container">
-                <Main changeUsername={() => this.props.setName("Anna")}/>
+                <Main signIn={() => this.props.setName("Anna")}/>
                 <User username={this.props.user.name}/>
             </div>
         );
