@@ -25,9 +25,9 @@ function SideBar(props) {
           </div>
         </form>
         <ul className="sidebar-menu" data-widget="tree">
-          <li className="treeview" >
-            <Link to="/Dashboard">
-              <i className="fa fa-dashboard"></i> <span>Dashboard</span>
+          <li>
+            <Link to="/">
+              <i className="fa fa-dashboard"></i> Dashboard
             </Link>
           </li>
           <li className="treeview">
@@ -38,28 +38,28 @@ function SideBar(props) {
               </span>
             </a>
             <ul className="treeview-menu">
-              <li><Link to="/MyDetails"><i className="fa fa-circle-o"></i> Personal Details</Link></li>
-              <li><a href="#"><i className="fa fa-circle-o"></i> Professional Details</a></li>
-              <li><a href="#"><i className="fa fa-circle-o"></i> Contact Details</a></li>
-              <li><a href="#"><i className="fa fa-circle-o"></i> Skills</a></li>
-              <li><a href="#"><i className="fa fa-circle-o"></i> Certificates</a></li>
-              <li><a href="#"><i className="fa fa-circle-o"></i> Leave</a></li>
-              <li><a href="#"><i className="fa fa-circle-o"></i> My Allocation</a></li>
+              <li><Link to="/PersonalDetails"><i className="fa fa-circle-o"></i> Personal Details</Link></li>
+              <li><Link to="/ProfessionalDetails"><i className="fa fa-circle-o"></i> Professional Details</Link></li>
+              <li><Link to="/ContactDetails"><i className="fa fa-circle-o"></i> Contact Details</Link></li>
+              <li><Link to="/Skills"><i className="fa fa-circle-o"></i> Skills</Link></li>
+              <li><Link to="/Certificates"><i className="fa fa-circle-o"></i> Certificates</Link></li>
+              <li><Link to="/Leave"><i className="fa fa-circle-o"></i> Leave</Link></li>
+              <li><Link to="/MyAllocation"><i className="fa fa-circle-o"></i> My Allocation</Link></li>
             </ul>
           </li>
-          <li className="treeview">
+          <li>
             <Link to="/Project">
-              <i className="fa fa-briefcase"></i> <span>Project</span>
+              <i className="fa fa-briefcase"></i> Project
             </Link>
           </li>
-          <li className="treeview">
+          <li>
             <Link to="/EmployeeDetails">
-              <i className="fa fa-users"></i> <span>Employee Info</span>
+              <i className="fa fa-users"></i> Employee Info
             </Link>
           </li>
-          <li className="treeview">
+          <li>
             <Link to="/HRManagement">
-              <i className="fa fa-male"></i> <span>HR Management</span>
+              <i className="fa fa-male"></i> HR Management
             </Link>
           </li>
         </ul>
