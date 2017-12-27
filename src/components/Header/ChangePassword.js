@@ -16,9 +16,9 @@ function ChangePassword() {
             <input type="text" className="form-control" placeholder="New Password" /><br />
             <input type="text" className="form-control" placeholder="Repeat New Password" /><br />
           </div>
-          <div class="box-footer">
-            <button type="submit" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-info pull-right">Change Password</button>
+          <div className="box-footer">
+            <button type="submit" className="btn btn-default">Cancel</button>
+            <button type="submit" className="btn btn-info pull-right">Change Password</button>
           </div>
         </div>
       </div>

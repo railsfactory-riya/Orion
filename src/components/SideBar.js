@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function SideBar(props) {
   return (
     <aside className="main-sidebar">
-      <section className="sidebar">
+      <section className="sidebar" style={{height: "auto"}}>
         <div className="user-panel">
           <div className="pull-left image">
             <img src="dist/img/riya.jpg" className="img-circle" alt="User Image" />
@@ -24,15 +24,21 @@ function SideBar(props) {
             </span>
           </div>
         </form>
-        <ul className="sidebar-menu" data-widget="tree">
+        <ul className="sidebar-menu tree" data-widget="tree">
+          <li className="header">MAIN NAVIGATION</li>
           <li>
             <Link to="/">
-              <i className="fa fa-dashboard"></i> Dashboard
+              <i className="fa fa-dashboard"></i> <span> Dashboard</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/Holiday">
+              <i className="fa fa-calendar"></i> <span> Holiday Calendar</span>
             </Link>
           </li>
           <li className="treeview">
             <a href="#">
-              <i className="fa fa-user"></i> <span>My Page</span>
+              <i className="fa fa-user"></i> <span> My Page</span>
               <span className="pull-right-container">
                 <i className="fa fa-angle-left pull-right"></i>
               </span>
@@ -49,17 +55,17 @@ function SideBar(props) {
           </li>
           <li>
             <Link to="/Project">
-              <i className="fa fa-briefcase"></i> Project
+              <i className="fa fa-briefcase"></i> <span> Project</span>
             </Link>
           </li>
           <li>
             <Link to="/EmployeeDetails">
-              <i className="fa fa-users"></i> Employee Info
+              <i className="fa fa-users"></i> <span> Employee Info</span>
             </Link>
           </li>
           <li>
             <Link to="/HRManagement">
-              <i className="fa fa-male"></i> HR Management
+              <i className="fa fa-male"></i> <span> HR Management</span>
             </Link>
           </li>
         </ul>
