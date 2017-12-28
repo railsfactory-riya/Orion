@@ -4,7 +4,8 @@ import { Route } from 'react-router-dom';
 import { DashBoard } from './DashBoard/DashBoard';
 import { EmployeeDetails } from './EmployeeInfo/EmployeeDetails';
 import { SingleEmployee } from './EmployeeInfo/SingleEmployee';
-import { HRManagement } from './HRManagement/HRManagement';
+import { Policies } from './HRManagement/Policies';
+import { Announcements } from './HRManagement/Announcements';
 import { PersonalDetails } from './MyPage/PersonalDetails';
 import { ProfessionalDetails } from './MyPage/ProfessionalDetails';
 import { ContactDetails } from './MyPage/ContactDetails';
@@ -22,7 +23,8 @@ class ContentArea extends Component {
         <Route exact path={'/'} component={DashBoard} />
         <Route path={'/EmployeeDetails'} component={EmployeeDetails} />
         <Route path={'/SingleEmployee'} component={SingleEmployee} />
-        <Route path={'/HRManagement'}  component={HRManagement} />
+        <Route path={'/Policies'}  component={Policies} />
+        <Route path={'/Announcements'}  component={Announcements} />
         <Route path={'/PersonalDetails'} component={PersonalDetails} />
         <Route path={'/ProfessionalDetails'} component={ProfessionalDetails} />
         <Route path={'/ContactDetails'} component={ContactDetails} />

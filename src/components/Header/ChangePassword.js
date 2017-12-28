@@ -2,11 +2,11 @@ import React from 'react';
 
 function ChangePassword() {
   return (
-    <li className="dropdown user user-menu">
+    <li className="dropdown user-menu">
       <a href="/" className="dropdown-toggle" data-toggle="dropdown">
         <i className="fa fa-edit"></i>
       </a>
-      <div className="dropdown-menu box box-info">
+      <div className="dropdown-menu box box-solid">
         <div className="box-header with-border">
           <h3 className="box-title"><b>Change Password</b></h3>
         </div>

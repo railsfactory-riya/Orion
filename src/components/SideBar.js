@@ -63,10 +63,25 @@ function SideBar(props) {
               <i className="fa fa-users"></i> <span> Employee Info</span>
             </Link>
           </li>
-          <li>
-            <Link to="/HRManagement">
-              <i className="fa fa-male"></i> <span> HR Management</span>
-            </Link>
+          <li className="treeview">
+            <a href="#">
+              <i className="fa fa-user"></i> <span> HR Management</span>
+              <span className="pull-right-container">
+                <i className="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul className="treeview-menu">
+              <li><Link to="/Policies"><i className="fa fa-circle-o"></i> Policies</Link></li>
+              <li>
+                <Link to="/Announcements">
+                  <i className="fa fa-circle-o"></i>
+                  <span> Announcements</span>
+                  <span class="pull-right-container">
+                    <small class="label pull-right bg-yellow">2</small>
+                  </span>
+                </Link>
+              </li>
+            </ul>
           </li>
         </ul>
       </section>
