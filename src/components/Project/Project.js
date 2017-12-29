@@ -113,7 +113,7 @@ export class Project extends Component {
                         <a href="#">4</a>
                       </li>
                       <li className="paginate_button next" id="example1_next">
-                        <a href="#" tabindex="0">Next</a>
+                        <a href="#" tabIndex="0">Next</a>
                       </li>
                     </ul>
                   </div>

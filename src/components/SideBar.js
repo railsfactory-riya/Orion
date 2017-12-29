@@ -76,8 +76,8 @@ function SideBar(props) {
                 <Link to="/Announcements">
                   <i className="fa fa-circle-o"></i>
                   <span> Announcements</span>
-                  <span class="pull-right-container">
-                    <small class="label pull-right bg-yellow">2</small>
+                  <span className="pull-right-container">
+                    <small className="label pull-right bg-yellow">2</small>
                   </span>
                 </Link>
               </li>

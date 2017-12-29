@@ -72,7 +72,7 @@ export class DashBoard extends Component {
                   <h3 className="timeline-header"><a href="#">Mr. Dinesh</a> shared a video</h3>
                   <div className="timeline-body">
                     <div className="embed-responsive embed-responsive-16by9">
-                      <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/vYF7wy64iXk" frameborder="0" allowfullscreen=""></iframe>
+                      <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/vYF7wy64iXk" frameBorder="0" allowFullScreen=""></iframe>
                     </div>
                   </div>
                   <div className="timeline-footer">
@@ -114,11 +114,23 @@ export class DashBoard extends Component {
                 <p>My Projects</p>
               </div>
               <div className="icon">
-                <i className="fa fa-flag-o"></i>
+                <i className="fa fa-flag-checkered"></i>
               </div>
               <Link to="/Project" className="small-box-footer">
                 More info <i className="fa fa-arrow-circle-right"></i>
               </Link>
+            </div>
+            <div className="small-box bg-green">
+              <div className="inner">
+                <h4><b>Recent Events</b></h4>
+                <p>In Sedin Technologies</p>
+              </div>
+              <div className="icon">
+                <i className="fa fa-history"></i>
+              </div>
+              <a href="https://sedintechnologies.com/" target="_blank" className="small-box-footer">
+                More info <i className="fa fa-arrow-circle-right"></i>
+              </a>
             </div>
           </div>
         </div>

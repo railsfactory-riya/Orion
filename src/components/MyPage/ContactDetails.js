@@ -13,7 +13,6 @@ export class ContactDetails extends Component {
           <div className="widget-user-image">
             <img className="img-circle" src="../dist/img/riya.jpg" alt="User Avatar" />
           </div>
-
           <div className="box-body">
             <strong>Personal Email</strong>
             <p className="text-muted">riyakapuria.1992@gmail.com</p>

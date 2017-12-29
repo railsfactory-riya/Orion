@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function ProfileTab(props) {
     const userDetails = props.user
@@ -18,10 +19,10 @@ function ProfileTab(props) {
           </li>
           <li className="user-footer">
             <div className="pull-left">
-              <a href="#" className="btn btn-default btn-flat">Profile</a>
+              <Link to="/PersonalDetails" className="btn btn-default btn-flat">Profile</Link>
             </div>
             <div className="pull-right">
-              <a href="#" className="btn btn-default btn-flat">Sign out</a>
+              <Link to="/" className="btn btn-default btn-flat">Sign out</Link>
             </div>
           </li>
         </ul>

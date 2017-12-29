@@ -1,18 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import { App } from './App';
-import { Signin } from './components/Signin';
-import { Signup } from './components/Signup';
+import { Signin } from './components/Session/Signin';
+import Session from './components/Session/Session';
+import { RequireAuth } from './Auth';
 
 
-export class AppRoute extends Component {
-  render() {
-    return (
-      <Router>
-        <Route path={'/'} component={App} />
-      </Router>
-    );
-  }
+function AppRoute() {
+  return (
+    <Router>
+      <div>
+        { Cookies.get('myToken')
+          ?
+          <Route path={'/'} component={RequireAuth(App)} />
+          :
+          <Route path={'/'} component={Session} />
+        }
+      </div>
+    </Router>
+  );
 }
+
+export default AppRoute;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import { AppRoute } from './Route';
+import AppRoute from './Route';
 
 
 export class App extends Component {
