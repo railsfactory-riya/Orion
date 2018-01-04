@@ -1,11 +1,11 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import logger from 'redux-logger';
+import {createStore, combineReducers, applyMiddleware} from "redux";
 
-import userDetails from './reducers/UserReducer';
-import signInDetails from './reducers/SignInReducer';
+import personalDetails from "./reducers/PersonalDetails_reducer";
 
 export default createStore(
-    combineReducers({}),
+    combineReducers({
+        personalDetails
+    }),
     {},
-    applyMiddleware(logger)
+    applyMiddleware()
 );

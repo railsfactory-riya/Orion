@@ -7,7 +7,7 @@ export class Skills extends Component {
         <div className="box-body">
           <strong>Present Address</strong>
           <br /><br />
-          <div class="table-responsive">
+          <div className="table-responsive">
             <table className="table no-margin">
               <thead>
                 <tr>

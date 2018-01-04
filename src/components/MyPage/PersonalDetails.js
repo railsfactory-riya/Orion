@@ -1,8 +1,23 @@
-import React, { Component } from 'react';
+import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 
-export class PersonalDetails extends Component {
+import { empDetails } from '../../actions/User';
+
+
+class PersonalDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  componentWillMount() {
+    this.props.empDetails()
+   }
+
   render() {
+  let { username } =  this.props;
+  console.log('props',this.props.personalDetails);
     return (
       <div>
         <section className="content-header">
@@ -135,7 +150,7 @@ export class PersonalDetails extends Component {
                   <p className="text-muted">0454</p>
                   <hr />
                   <strong>Username</strong>
-                  <p className="text-muted">riya</p>
+                  <p className="text-muted">{this.props.personalDetails.INITIAL_STATE.single_emp}</p>
                   <hr />
                   <strong>Firstname</strong>
                   <p className="text-muted">Riya</p>
@@ -169,3 +184,19 @@ export class PersonalDetails extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    personalDetails: state.personalDetails
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    empDetails: (single_emp) => {
+      dispatch(empDetails(single_emp));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalDetails);

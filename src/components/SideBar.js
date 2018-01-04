@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function SideBar(props) {
   return (
-    <aside className="main-sidebar">
+    <aside className="main-sidebar" style={{bottom: "0 !important"}}>
       <section className="sidebar" style={{height: "auto"}}>
         <div className="user-panel">
           <div className="pull-left image">
