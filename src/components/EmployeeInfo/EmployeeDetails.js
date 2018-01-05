@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export class EmployeeDetails extends Component {
+import { allEmp } from '../../actions/User';
+
+class EmployeeDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  componentWillMount() {
+    this.props.allEmp()
+   }
+
   render() {
     return (
       <div className="box">
@@ -82,7 +94,7 @@ export class EmployeeDetails extends Component {
                     <a href="#">4</a>
                   </li>
                   <li className="paginate_button next" id="example1_next">
-                    <a href="#" tabindex="0">Next</a>
+                    <a href="#" tabIndex="0">Next</a>
                   </li>
                 </ul>
               </div>
@@ -93,3 +105,19 @@ export class EmployeeDetails extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    userDetails: state.userDetails
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    allEmp: (all_emp) => {
+      dispatch(allEmp(all_emp));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDetails);

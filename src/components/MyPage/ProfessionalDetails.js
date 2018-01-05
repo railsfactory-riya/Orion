@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 
-export class ProfessionalDetails extends Component {
+import { empDetails } from '../../actions/User';
+
+class ProfessionalDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  componentWillMount() {
+    this.props.empDetails()
+   }
+
   render() {
     return (
       <div>
@@ -129,3 +141,19 @@ export class ProfessionalDetails extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    userDetails: state.userDetails
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    empDetails: (personal_details) => {
+      dispatch(empDetails(personal_details));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfessionalDetails);

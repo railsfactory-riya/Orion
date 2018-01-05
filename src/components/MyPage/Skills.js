@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export class Skills extends Component {
+import { otherDetails } from '../../actions/User';
+
+class Skills extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  componentWillMount() {
+    this.props.otherDetails()
+   }
+
   render() {
     return (
       <div className="box box-solid">
@@ -49,3 +61,20 @@ export class Skills extends Component {
     );
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    userDetails: state.userDetails
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    otherDetails: (other_details) => {
+      dispatch(otherDetails(other_details));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Skills);
