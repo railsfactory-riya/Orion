@@ -17,6 +17,12 @@ import { Project } from './components/Project/Project';
 import { Holiday } from './components/Holiday';
 
 
+// function requireAuth(nextState, replace) {
+//  if (!loggedIn()) {
+//  replace({pathname: '/'})
+//  }
+// }
+
 function ContentAreaRoute(props) {
   return (
     <div>

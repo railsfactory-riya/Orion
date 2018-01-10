@@ -1,31 +1,42 @@
 import ApiCall from '../ApiCall';
 
-export function empDetails(request) {
+export function loginDetails(request) {
   var input = {
     username: 'riya',
     password: 'sedin123'
   };
   let url = "admins/api_login";
-  ApiCall.postApiCall(url, input)
-  .then(function (response) {
-     console.log(response);
-    //  request = response.json();
-    //  if(response.status == 200) {
-    //    let token = response.token;
-    //    let name = response.name;
-    //    Cookies.set('myToken', token, { expires: 15 });
-    //    Cookies.set('myName', name, { expires: 15 });
-    //    window.location.replace('/');
-    //  }
-    //  else if(response.status == 404) {
-    //    console.log("404!!!!!!!");
-    //  }
-   })
-   .catch(function (error) {
-     console.log(error);
-   });
-  return {
-    type: "USER_DETAILS",
-    payload: request
-  };
+  return (dispatch) => {
+   dispatch({type: "LOGIN_ATTEMPT"});
+   ApiCall.getApiCall(url, input)
+    .then((response) => {
+      dispatch({type: "LOGIN_SUCCESS", payload: response});
+    })
+    .catch((error) => {
+      dispatch({type: "LOGIN_FAIL", payload: error});
+    })
+  }
 }
+
+
+
+
+ // export function allEmp() {
+ //   var input = {
+ //     username: 'balaji',
+ //     password: 'Balaji123#'
+ //   };
+ //   let url = "admins/api_login";
+ //   let result = ApiCall.postApiCall(url, input)
+ //   .then(function (response) {
+ //      console.log(response);
+ //    })
+ //    .catch(function (error) {
+ //      console.log(error);
+ //    });
+ //    console.log(result);
+ //   return {
+ //     type: "USER_DETAILS",
+ //     payload: result
+ //   };
+ // }

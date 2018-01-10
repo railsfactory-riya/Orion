@@ -1,12 +1,12 @@
 const ApiCalls = {
 
   getApiCall(url) {
-    let base_url = "http://192.168.1.151:3000/api/";
-    let api_token = "662bf5cba7782e30f14855bff7b92b6cfae99b78";
-    let fetch_url = base_url + url + api_token ;
+    let base_url = "https://api.github.com/users?since=";
+    let api_token = "1f7169e92c1d0722db575b877707cf0b88b8f0ad";
+    let fetch_url = base_url + url + api_token;
     let myHeaders = new Headers({
       'Accept': 'application/json',
-      'Content-Type': "application/json"
+      'Content-Type': 'application/json'
     });
     return fetch(fetch_url, {
       method: "GET",
@@ -31,7 +31,7 @@ const ApiCalls = {
     let fetch_url = base_url + url;
     let myHeaders = new Headers({
       'Accept': 'application/json',
-      'Content-Type': "application/json"
+      'Content-Type': 'application/json'
     });
     // var data = new FormData();
     // data.append("json", JSON.stringify(input));

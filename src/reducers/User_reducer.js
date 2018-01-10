@@ -1,6 +1,6 @@
 import { USER_DETAILS, OTHER_DETAILS, ALL_EMP } from '../actions/User';
 
-const INITIAL_STATE = { personal_details: null, other_details: null };
+const INITIAL_STATE = { personal_details: null, other_details: null, all_emp: null };
 
 const userDetailsReducer = (state = {
   INITIAL_STATE

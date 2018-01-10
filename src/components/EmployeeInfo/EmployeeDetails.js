@@ -15,6 +15,7 @@ class EmployeeDetails extends Component {
    }
 
   render() {
+    let all_emp = (this.props.userDetails && this.props.userDetails.all_emp) ? this.props.userDetails.all_emp : [];
     return (
       <div className="box">
         <div className="box-header with-border">
@@ -59,13 +60,17 @@ class EmployeeDetails extends Component {
                   <th>Email</th>
                   <th>Department</th>
                 </tr>
-                <tr>
-                  <td>0467</td>
-                  <td><Link to="/SingleEmployee">Abi</Link></td>
-                  <td>Somasundaram</td>
-                  <td>abi@railsfactory.org</td>
-                  <td>Solution Center C</td>
-                </tr>
+                {all_emp.map((values,key) => {
+                  return(
+                    <tr key={key}>
+                      <td>{values.id}</td>
+                      <td><Link to="/SingleEmployee">{values.login}</Link></td>
+                      <td>Somasundaram</td>
+                      <td>abi@railsfactory.org</td>
+                      <td>Solution Center C</td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
