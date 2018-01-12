@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import { DashBoard } from './components/DashBoard/DashBoard';
 import EmployeeDetails from './components/EmployeeInfo/EmployeeDetails';
-import { SingleEmployee } from './components/EmployeeInfo/SingleEmployee';
+import SingleEmployee from './components/EmployeeInfo/SingleEmployee';
 import { Policies } from './components/HRManagement/Policies';
 import { Announcements } from './components/HRManagement/Announcements';
 import PersonalDetails from './components/MyPage/PersonalDetails';
@@ -26,7 +26,8 @@ import { Holiday } from './components/Holiday';
 function ContentAreaRoute(props) {
   return (
     <div>
-      <Route exact path={'/'} component={DashBoard} />
+      <Route exact path="/" render={() => (<Redirect to="/Dashboard" />)} />
+      <Route path={'/Dashboard'} component={DashBoard} />
       <Route path={'/EmployeeDetails'} component={EmployeeDetails} />
       <Route path={'/SingleEmployee'} component={SingleEmployee} />
       <Route path={'/Policies'}  component={Policies} />

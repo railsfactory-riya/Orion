@@ -1,19 +1,29 @@
 import ApiCall from '../ApiCall';
 
-export function loginDetails(request) {
-  var input = {
-    username: 'riya',
-    password: 'sedin123'
-  };
+//Sign In User
+export const LOGIN_FETCH = 'LOGIN_FETCH';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+
+export function loginDetails(input) {
   let url = "admins/api_login";
   return (dispatch) => {
-   dispatch({type: "LOGIN_ATTEMPT"});
-   ApiCall.getApiCall(url, input)
+   dispatch({
+     type: LOGIN_FETCH,
+     payload: input
+   });
+   ApiCall.postApiCall(url, input)
     .then((response) => {
-      dispatch({type: "LOGIN_SUCCESS", payload: response});
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: response
+      });
     })
     .catch((error) => {
-      dispatch({type: "LOGIN_FAIL", payload: error});
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: error
+      });
     })
   }
 }
@@ -21,11 +31,7 @@ export function loginDetails(request) {
 
 
 
- // export function allEmp() {
- //   var input = {
- //     username: 'balaji',
- //     password: 'Balaji123#'
- //   };
+ // export function loginDetails(input) {
  //   let url = "admins/api_login";
  //   let result = ApiCall.postApiCall(url, input)
  //   .then(function (response) {
@@ -36,7 +42,7 @@ export function loginDetails(request) {
  //    });
  //    console.log(result);
  //   return {
- //     type: "USER_DETAILS",
+ //     type: "LOGIN_SUCCESS",
  //     payload: result
  //   };
  // }

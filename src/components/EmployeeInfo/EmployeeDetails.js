@@ -15,7 +15,8 @@ class EmployeeDetails extends Component {
    }
 
   render() {
-    let all_emp = (this.props.userDetails && this.props.userDetails.all_emp) ? this.props.userDetails.all_emp : [];
+    let all_emp = (this.props.userDetailsReducer && this.props.userDetailsReducer.all_emp) ? this.props.userDetailsReducer.all_emp.users : [];
+    console.log(all_emp);
     return (
       <div className="box">
         <div className="box-header with-border">
@@ -63,11 +64,18 @@ class EmployeeDetails extends Component {
                 {all_emp.map((values,key) => {
                   return(
                     <tr key={key}>
-                      <td>{values.id}</td>
-                      <td><Link to="/SingleEmployee">{values.login}</Link></td>
-                      <td>Somasundaram</td>
-                      <td>abi@railsfactory.org</td>
-                      <td>Solution Center C</td>
+                      <td>{values.emp_code}</td>
+                      <td>
+                        <Link to={{
+                          pathname: '/SingleEmployee',
+                          state: {ID: values.id}
+                        }} >
+                          {values.firstname}
+                        </Link>
+                      </td>
+                      <td>{values.lastname}</td>
+                      <td>{values.email}</td>
+                      <td>{values.department_name}</td>
                     </tr>
                   )
                 })}
@@ -113,15 +121,13 @@ class EmployeeDetails extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userDetails: state.userDetails
+    userDetailsReducer: state.userDetailsReducer
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    allEmp: (all_emp) => {
-      dispatch(allEmp(all_emp));
-    }
+    allEmp: (all_emp) => dispatch(allEmp(all_emp)),
   };
 };
 

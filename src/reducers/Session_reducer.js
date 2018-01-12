@@ -1,36 +1,41 @@
-import { LOGIN_ATTEMPT, LOGIN_SUCCESS, LOGIN_FAIL } from '../actions/Session';
+import { LOGIN_FETCH, LOGIN_SUCCESS, LOGIN_FAIL } from '../actions/Session';
 
-const INITIAL_STATE = { login_details: null, loggedIn: false, error: null };
+const INITIAL_STATE = {
+  login_details: null,
+  loggedIn: false,
+  error: null,
+  data: null
+};
 
-const sessionReducer = (state = {
-  INITIAL_STATE
-}, action) => {
+const sessionReducer = (state = INITIAL_STATE , action) => {
   switch (action.type) {
-    case "LOGIN_ATTEMPT":
-      state = {
+    case LOGIN_FETCH:
+      return {
         ...state,
         login_details: action.payload,
-        loggedIn: false
+        loggedIn: false,
+        error: null,
+        data: null
       };
-      break;
-    case "LOGIN_SUCCESS":
-      state = {
+    case LOGIN_SUCCESS:
+      return {
         ...state,
+        login_details: null,
         loggedIn: true,
         error: null,
+        data: action.payload
       };
-      break;
-    case "LOGIN_FAIL":
-      state = {
+    case LOGIN_FAIL:
+      return {
         ...state,
+        login_details: null,
         loggedIn: false,
-        error: action.error
+        error: action.payload,
+        data: null
       };
-      break;
     default:
-      break;
+      return state;
   }
-  return state;
 };
 
 export default sessionReducer;

@@ -6,9 +6,7 @@ import Cookies from 'js-cookie';
 
 import { App } from './App';
 import Session from './components/Session/Session';
-import { Signin } from './components/Session/Signin';
-import { RequireAuth } from './Auth';
-import store from "./store";
+import store from './store';
 
 
 export class Application extends Component {
@@ -17,11 +15,12 @@ export class Application extends Component {
       <Provider store={store}>
         <Router>
           <div>
-            { Cookies.get('myToken')
+            {console.log('Token', Cookies.get('Token'))}
+            { (Cookies.get('Token'))
               ?
-              <Route path={'/'} component={RequireAuth(App)} />
+              (<Route path={'/'} component={App} />)
               :
-              <Route path={'/'} component={Session} />
+              (<Route path={'/'} component={Session} />)
             }
           </div>
         </Router>

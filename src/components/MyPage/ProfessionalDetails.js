@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
-import { empDetails } from '../../actions/User';
+import { professionalDetails } from '../../actions/User';
 
 class ProfessionalDetails extends Component {
   constructor(props) {
@@ -10,10 +10,14 @@ class ProfessionalDetails extends Component {
   }
 
   componentWillMount() {
-    this.props.empDetails()
+    this.props.professionalDetails()
    }
 
   render() {
+    let professional_details = (this.props.userDetailsReducer && this.props.userDetailsReducer.professional_details) ? this.props.userDetailsReducer.professional_details.user : [];
+    let salaray_account = (this.props.userDetailsReducer.professional_details && this.props.userDetailsReducer.professional_details.user.salaray_account) ? this.props.userDetailsReducer.professional_details.user.salaray_account : [];
+    let certificate = (this.props.userDetailsReducer.professional_details && this.props.userDetailsReducer.professional_details.user.certificate) ? this.props.userDetailsReducer.professional_details.user.certificate : [];
+    let languages = (this.props.userDetailsReducer.professional_details && this.props.userDetailsReducer.professional_details.user.languages) ? this.props.userDetailsReducer.professional_details.user.languages : [];
     return (
       <div>
         <div className="box box-widget widget-user-2">
@@ -21,8 +25,8 @@ class ProfessionalDetails extends Component {
             <div className="widget-user-image">
               <img className="img-circle" src="../dist/img/riya.jpg" alt="User Avatar" />
             </div>
-            <h3 className="widget-user-username">Riya Kapuria</h3>
-            <h5 className="widget-user-desc">Jr. Software Developer</h5>
+            <h3 className="widget-user-username">{professional_details.firstname} {professional_details.lastname}</h3>
+            <h5 className="widget-user-desc">{professional_details.designation}</h5>
           </div>
           <div className="box box-default">
             <div className="box-header with-border">
@@ -30,7 +34,7 @@ class ProfessionalDetails extends Component {
             </div>
             <div className="box-body">
               <strong>Email</strong>
-              <p className="text-muted">riya@railsfactory.org</p>
+              <p className="text-muted">{professional_details.email}</p>
               <hr />
               <strong>Salary Account</strong>
               <br /><br />
@@ -44,26 +48,26 @@ class ProfessionalDetails extends Component {
                     <th>Pan Number</th>
                   </tr>
                   <tr>
-                    <td>Bank</td>
-                    <td>Ashok Pillar</td>
-                    <td></td>
-                    <td>HDFC</td>
-                    <td>DUQPK8858F</td>
+                    <td>{salaray_account.payment_mode}</td>
+                    <td>{salaray_account.bank_branch}</td>
+                    <td>{salaray_account.account_number}</td>
+                    <td>{salaray_account.bank_name}</td>
+                    <td>{salaray_account.pan_number}</td>
                   </tr>
                 </tbody>
               </table>
               <hr />
               <strong>Department</strong>
-              <p className="text-muted">Solution Center B</p>
+              <p className="text-muted">{professional_details.department_name}</p>
               <hr />
               <strong>Designation</strong>
-              <p className="text-muted">Jr.Software Engineer</p>
+              <p className="text-muted">{professional_details.designation_name}</p>
               <hr />
               <strong>Date of joining</strong>
-              <p className="text-muted">11 July, 2016</p>
+              <p className="text-muted">{professional_details.date_of_joining}</p>
               <hr />
               <strong>Total Experience</strong>
-              <p className="text-muted">1year(s):6months(s)</p>
+              <p className="text-muted">{professional_details.total_experience}</p>
               <hr />
               <strong>Education Qualification</strong>
               <br /><br />
@@ -77,11 +81,11 @@ class ProfessionalDetails extends Component {
                     <th>Percentage/GPA</th>
                   </tr>
                   <tr>
-                    <td>MAKAUT</td>
-                    <td>B.Tech</td>
-                    <td>CSE</td>
-                    <td>May-2012</td>
-                    <td>7.8</td>
+                    <td></td>
+                    <td>{professional_details.education}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>
@@ -98,17 +102,31 @@ class ProfessionalDetails extends Component {
                     <th>Remarks</th>
                   </tr>
                   <tr>
-                    <td>Primary</td>
-                    <td>Web Design</td>
-                    <td>Wireframes</td>
-                    <td>9</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
               <hr />
-              <strong>No Certificates</strong>
-              <p className="text-muted">NA</p>
+              <strong>Certificates</strong>
+              <br /><br />
+              <table className="table table-bordered">
+                <tbody>
+                  <tr>
+                    <th>University/College</th>
+                    <th>Active Status</th>
+                    <th>Created At</th>
+                  </tr>
+                  <tr>
+                    <td>{certificate.name}</td>
+                    <td>{certificate.is_active === true ? <span className="fa fa-check"></span> : <span className="fa fa-close"></span>}</td>
+                    <td>{certificate.created_at}</td>
+                  </tr>
+                </tbody>
+              </table>
               <hr />
               <strong>Languages</strong>
               <br /><br />
@@ -120,18 +138,16 @@ class ProfessionalDetails extends Component {
                     <th>Write</th>
                     <th>Speak</th>
                   </tr>
-                  <tr>
-                    <td>English</td>
-                    <td>true</td>
-                    <td>true</td>
-                    <td>true</td>
-                  </tr>
-                  <tr>
-                    <td>Hindi</td>
-                    <td>true</td>
-                    <td>false</td>
-                    <td>true</td>
-                  </tr>
+                  {languages.map((values,key) => {
+                    return(
+                      <tr key={key}>
+                        <td>{values.language}</td>
+                        <td>{values.read === true ? <span className="fa fa-check"></span> : <span className="fa fa-close"></span>}</td>
+                        <td>{values.write === true ? <span className="fa fa-check"></span> : <span className="fa fa-close"></span>}</td>
+                        <td>{values.speak === true ? <span className="fa fa-check"></span> : <span className="fa fa-close"></span>}</td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
@@ -144,14 +160,14 @@ class ProfessionalDetails extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userDetails: state.userDetails
+    userDetailsReducer: state.userDetailsReducer
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    empDetails: (personal_details) => {
-      dispatch(empDetails(personal_details));
+    professionalDetails: (personal_details) => {
+      dispatch(professionalDetails(personal_details));
     }
   };
 };

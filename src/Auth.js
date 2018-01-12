@@ -7,13 +7,11 @@ import Cookies from 'js-cookie';
 const RequireAuth = (Component) => {
   return class App extends Component {
     componentWillMount() {
-      let token = 'vbnvbnmk';
-      Cookies.set('myToken', token, { expires: 15 });
-      let getToken = Cookies.get('myToken');
-      console.log('getToken',getToken);
-      if(getToken) {
-        this.props.history.replace({pathname: '/'});
-      }
+      let token = Cookies.get('Token');
+      console.log('Token',token);
+      // if(token) {
+      //   this.props.history.replace({pathname: '/', component: {App}});
+      // }
     }
     render() {
       return <Component {...this.props} />

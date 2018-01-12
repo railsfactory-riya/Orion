@@ -1,21 +1,38 @@
 import ApiCall from '../ApiCall';
+import Cookies from 'js-cookie';
 
-export function empDetails(request) {
-  let url = "employees/452?access_token=";
+let id = Cookies.get('ID');
+
+export function personalDetails() {
+  let url = "employees/"+id+"?access_token=";
   return (dispatch) => {
-   dispatch({type: "USER_DETAILS"});
+   dispatch({type: "PERSONAL_DETAILS"});
    ApiCall.getApiCall(url)
     .then((response) => {
-      dispatch({type: "USER_DETAILS", payload: response});
+      dispatch({type: "PERSONAL_DETAILS", payload: response});
     })
     .catch((error) => {
-      dispatch({type: "USER_DETAILS", payload: error});
+      dispatch({type: "PERSONAL_DETAILS", payload: error});
     })
   }
 }
 
-export function otherDetails(request) {
-  let url = "employees/452/skills?access_token=";
+export function professionalDetails() {
+  let url = "employees/"+id+"/professional?access_token=";
+  return (dispatch) => {
+   dispatch({type: "PROFESSIONAL_DETAILS"});
+   ApiCall.getApiCall(url)
+    .then((response) => {
+      dispatch({type: "PROFESSIONAL_DETAILS", payload: response});
+    })
+    .catch((error) => {
+      dispatch({type: "PROFESSIONAL_DETAILS", payload: error});
+    })
+  }
+}
+
+export function otherDetails() {
+  let url = "employees/"+id+"/skills?access_token=";
   return (dispatch) => {
    dispatch({type: "OTHER_DETAILS"});
    ApiCall.getApiCall(url)
@@ -29,7 +46,9 @@ export function otherDetails(request) {
 }
 
 export function allEmp() {
-  let url = "150";
+  let finalurl = "&access_token=";
+  let pageurl = "employees?page=1";
+  let url = pageurl + finalurl;
   return (dispatch) => {
    dispatch({type: "ALL_EMP"});
    ApiCall.getApiCall(url)
@@ -38,6 +57,20 @@ export function allEmp() {
     })
     .catch((error) => {
       dispatch({type: "ALL_EMP", payload: error});
+    })
+  }
+}
+
+export function singleEmpDetails(ID) {
+  let url = "employees/"+ID+"?access_token=";
+  return (dispatch) => {
+   dispatch({type: "SINGLE_EMP_DETAILS"});
+   ApiCall.getApiCall(url)
+    .then((response) => {
+      dispatch({type: "SINGLE_EMP_DETAILS", payload: response});
+    })
+    .catch((error) => {
+      dispatch({type: "SINGLE_EMP_DETAILS", payload: error});
     })
   }
 }

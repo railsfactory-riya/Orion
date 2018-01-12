@@ -12,7 +12,7 @@ export class Leave extends Component {
             <div className="col-md-3">
               <div className="box box-primary">
                 <div className="box-body box-profile">
-                  <img className="profile-user-img img-responsive img-circle" src="../../dist/img/riya.jpg" alt="User profile picture" />
+                  <img className="profile-user-img img-responsive img-circle" src="../../dist/img/riya.jpg" alt="User profile" />
                   <h3 className="profile-username text-center">Riya Kapuria</h3>
                   <p className="text-muted text-center">Jr. Software Engineer</p>
                   <ul className="list-group list-group-unbordered">

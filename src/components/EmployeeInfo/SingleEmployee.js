@@ -1,84 +1,110 @@
-import React, { Component } from 'react';
+import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export class SingleEmployee extends Component {
+import { singleEmpDetails } from '../../actions/User';
+
+
+class SingleEmployee extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  componentWillMount() {
+    this.props.singleEmpDetails(this.props.location.state.ID)
+   }
+
   render() {
+  let signle_emp_details = (this.props.userDetailsReducer && this.props.userDetailsReducer.signle_emp_details) ? this.props.userDetailsReducer.signle_emp_details.user : [];
+  console.log(signle_emp_details);
     return (
       <div>
-        <section className="content-header">
-          <Link to="/EmployeeDetails">
-            <button type="button" className="btn bg-maroon margin">
-              <i className="fa fa-chevron-left"></i> <span> Back</span>
-            </button>
-          </Link>
-          <ol className="breadcrumb">
-            <li><Link to="/"><i className="fa fa-dashboard"></i> Home</Link></li>
-            <li><Link to="/EmployeeDetails">Employee Info</Link></li>
-            <li className="active">Employee Details</li>
-          </ol>
-        </section>
-        <section className="content">
-          <div className="row">
-            <div className="col-md-4">
-              <div className="box box-widget widget-user-2">
-                <div className="widget-user-header bg-yellow">
-                  <div className="widget-user-image">
-                    <img className="img-circle" src="../dist/img/riya.jpg" alt="User Avatar" />
-                  </div>
-                  <h3 className="widget-user-username">Riya Kapuria</h3>
-                  <h5 className="widget-user-desc">Jr. Software Developer</h5>
+        <div className="box box-widget widget-user">
+          <div className="widget-user-header bg-green">
+            <h3 className="widget-user-username"><b>{signle_emp_details.firstname} {signle_emp_details.lastname}</b></h3>
+            <h5 className="widget-user-desc">{signle_emp_details.designation_name}</h5>
+          </div>
+          <div className="widget-user-image">
+            <img className="img-circle" src="../dist/img/riya.jpg" alt="User Avatar" />
+          </div>
+          <div className="box-footer">
+            <div className="row">
+              <div className="col-sm-4 border-right">
+                <div className="description-block">
+                  <h5 className="description-header">{signle_emp_details.emp_code}</h5>
+                  <span className="description-text">Employee ID</span>
                 </div>
-                <div className="box-footer no-padding">
-                  <ul className="nav nav-stacked">
-                    <li><a href="#">Projects <span className="pull-right badge bg-blue">31</span></a></li>
-                    <li><a href="#">Tasks <span className="pull-right badge bg-aqua">5</span></a></li>
-                    <li><a href="#">Completed Projects <span className="pull-right badge bg-green">12</span></a></li>
-                    <li><a href="#">Followers <span className="pull-right badge bg-red">842</span></a></li>
-                  </ul>
+              </div>
+              <div className="col-sm-4 border-right">
+                <div className="description-block">
+                  <h5 className="description-header">{signle_emp_details.username}</h5>
+                  <span className="description-text">Username</span>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="description-block">
+                  <h5 className="description-header">{signle_emp_details.no_of_projects}</h5>
+                  <span className="description-text">Prijects</span>
                 </div>
               </div>
             </div>
-            <div className="col-md-8">
-            <div className="box box-primary">
+            <hr />
+            <div className="box box-success">
               <div className="box-header with-border">
-                <h3 className="box-title">About Me</h3>
+                <h3 className="box-title">About {signle_emp_details.firstname}</h3>
               </div>
               <div className="box-body">
                 <strong>Employee code</strong>
-                <p className="text-muted">0454</p>
+                <p className="text-muted">{signle_emp_details.emp_code}</p>
                 <hr />
                 <strong>Username</strong>
-                <p className="text-muted">riya</p>
+                <p className="text-muted">{signle_emp_details.username}</p>
                 <hr />
                 <strong>Firstname</strong>
-                <p className="text-muted">Riya</p>
+                <p className="text-muted">{signle_emp_details.firstname}</p>
                 <hr />
                 <strong>Lastname</strong>
-                <p className="text-muted">Kapuria</p>
+                <p className="text-muted">{signle_emp_details.lastname}</p>
                 <hr />
                 <strong>Education</strong>
-                <p className="text-muted">RCC Institute of Information Technology</p>
+                <p className="text-muted">{signle_emp_details.education}</p>
                 <hr />
                 <strong>Gender</strong>
-                <p className="text-muted">Female</p>
+                <p className="text-muted">{signle_emp_details.gender}</p>
                 <hr />
                 <strong>Marital Status</strong>
-                <p className="text-muted">Single</p>
+                <p className="text-muted">{signle_emp_details.marital_status}</p>
                 <hr />
                 <strong>Date of Birth</strong>
-                <p className="text-muted">30 August, 1994</p>
+                <p className="text-muted">{signle_emp_details.date_of_birth}</p>
                 <hr />
                 <strong>Blood Group</strong>
-                <p className="text-muted">O Positive</p>
+                <p className="text-muted">{signle_emp_details.blood_group}</p>
                 <hr />
                 <strong>Total Experience</strong>
-                <p className="text-muted">1year(s):6months(s)</p>
+                <p className="text-muted">{signle_emp_details.total_experience}</p>
               </div>
             </div>
-            </div>
           </div>
-        </section>
+        </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    userDetailsReducer: state.userDetailsReducer
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    singleEmpDetails: (signle_emp_details) => {
+      dispatch(singleEmpDetails(signle_emp_details));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleEmployee);

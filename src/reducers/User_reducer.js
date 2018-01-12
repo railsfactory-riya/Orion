@@ -1,33 +1,39 @@
-import { USER_DETAILS, OTHER_DETAILS, ALL_EMP } from '../actions/User';
+import { PERSONAL_DETAILS, OTHER_DETAILS, PROFESSIONAL_DETAILS, ALL_EMP } from '../actions/User';
 
-const INITIAL_STATE = { personal_details: null, other_details: null, all_emp: null };
+const INITIAL_STATE = { personal_details: null, other_details: null, all_emp: null, professional_details: null };
 
 const userDetailsReducer = (state = {
   INITIAL_STATE
 }, action) => {
   switch (action.type) {
-    case "USER_DETAILS":
-      state = {
+    case "PERSONAL_DETAILS":
+      return {
         ...state,
         personal_details: action.payload
       };
-      break;
     case "OTHER_DETAILS":
-      state = {
+      return {
         ...state,
         other_details: action.payload
       };
-      break;
+    case "PROFESSIONAL_DETAILS":
+      return {
+        ...state,
+        professional_details: action.payload
+      };
     case "ALL_EMP":
-      state = {
+      return {
         ...state,
         all_emp: action.payload
       };
-      break;
+    case "SINGLE_EMP_DETAILS":
+      return {
+        ...state,
+        signle_emp_details: action.payload
+      };
     default:
-      break;
+      return state;
   }
-  return state;
 };
 
 export default userDetailsReducer;

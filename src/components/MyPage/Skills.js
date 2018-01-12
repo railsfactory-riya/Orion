@@ -65,7 +65,7 @@ class Skills extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userDetails: state.userDetails
+    userDetailsReducer: state.userDetailsReducer
   };
 };
 
