@@ -13,7 +13,7 @@ import Skills from './components/MyPage/Skills';
 import { Certificates } from './components/MyPage/Certificates';
 import { Leave } from './components/MyPage/Leave';
 import { MyAllocation } from './components/MyPage/MyAllocation';
-import { Project } from './components/Project/Project';
+import Project from './components/Project/Project';
 import { Holiday } from './components/Holiday';
 
 

@@ -47,7 +47,7 @@ export function otherDetails() {
 
 export function allEmp() {
   let finalurl = "&access_token=";
-  let pageurl = "employees?page=1";
+  let pageurl = "employees?page=1?per_page=10";
   let url = pageurl + finalurl;
   return (dispatch) => {
    dispatch({type: "ALL_EMP"});

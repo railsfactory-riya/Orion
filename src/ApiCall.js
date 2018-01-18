@@ -1,7 +1,7 @@
 const ApiCalls = {
 
   getApiCall(url) {
-    let base_url = "http://192.168.1.151:3000/api/";
+    let base_url = "http://192.168.1.56:3000/api/";
     let api_token = "1234";
     let fetch_url = base_url + url + api_token;
     let myHeaders = new Headers({
@@ -27,7 +27,7 @@ const ApiCalls = {
   },
 
   postApiCall(url, input) {
-    let base_url = "http://192.168.1.151:3000/api/";
+    let base_url = "http://192.168.1.56:3000/api/";
     let fetch_url = base_url + url;
     let myHeaders = new Headers({
       'Accept': 'application/json',
