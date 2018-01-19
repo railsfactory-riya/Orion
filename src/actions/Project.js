@@ -5,7 +5,7 @@ let id = Cookies.get('ID');
 
 export function projectDetails(input) {
   console.log("input",input);
-  let filter_url = "projects?page="+input.page+"&filter="+input.filter+"&query="+"&access_token=";
+  let filter_url = "projects?page="+input.page+"&filter="+input.filter+"&access_token=";
   let search_url = "projects?page="+input.page+"&query="+input.search+"&access_token=";
   let url = null;
   { input.search === null ? url = filter_url : url = search_url }

@@ -14,6 +14,7 @@ import { Certificates } from './components/MyPage/Certificates';
 import { Leave } from './components/MyPage/Leave';
 import { MyAllocation } from './components/MyPage/MyAllocation';
 import Project from './components/Project/Project';
+import AssignProject from './components/Project/AssignProject';
 import { Holiday } from './components/Holiday';
 
 
@@ -40,6 +41,7 @@ function ContentAreaRoute(props) {
       <Route path={'/Leave'} component={Leave} />
       <Route path={'/MyAllocation'} component={MyAllocation} />
       <Route path={'/Project'} component={Project} />
+      <Route path={'/AssignProject'} component={AssignProject} />
       <Route path={'/Holiday'} component={Holiday} />
     </div>
   )

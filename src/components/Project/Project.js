@@ -1,112 +1,137 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Pagination from 'react-js-pagination';
+import DatePicker from 'react-date-picker';
 
 import { projectDetails } from '../../actions/Project';
 
 class Project extends Component {
   constructor(props) {
+    let to_date = new Date().setDate(new Date().getDate() + 1)
     super(props);
     this.state = {
-      page: 1,
-      filter: null,
-      search: null,
-      search_item: ''
+      filter_item: null,
+      search_item: '',
+      activePage: 1,
+      fromDate: new Date(),
+      toDate: new Date()
     };
-    this.nextPage = this.nextPage.bind(this);
-    this.previousPage = this.previousPage.bind(this);
     this.handleGoClick = this.handleGoClick.bind(this);
   }
 
   componentWillMount() {
     let input = {
-      page: 1,
-      filter: null,
+      page: this.state.activePage,
+      filter: this.state.filter_item,
       search: null
     };
     this.props.projectDetails(input);
-   }
+  }
 
-   //Pagination
-   nextPage() {
-     this.setState({page: this.state.page+1}, () => {
-       this.props.projectDetails(this.state.page);
+  //Pagination
+  handlePageChange(pageNumber) {
+    let search_item = this.state.search_item === '' ? null : this.state.search_item
+    this.setState ({activePage: pageNumber}, () => {
+     this.props.projectDetails ({
+       page: this.state.activePage,
+       filter: this.state.filter_item,
+       search: search_item
      });
-     window.scrollTo(0, 0);
-   }
+    });
+    window.scrollTo(0, 0);
+  }
 
-   previousPage() {
-     this.setState({page: this.state.page-1}, () => {
-       this.props.projectDetails(this.state.page);
-     });
-     window.scrollTo(0, 0);
-   }
+  //Filter
+  filter(value) {
+   this.setState ({
+     activePage: 1,
+     filter_item: value,
+     search_item: ''
+   }, () => {
+    this.props.projectDetails ({
+      page: this.state.activePage,
+      filter: this.state.filter_item,
+      search: null
+    });
+   });
+   window.scrollTo(0, 0);
+  }
 
-   //Filter
-   filter(value) {
-     let input = {
-       page: 1,
-       filter: value,
-       search: null
-     };
-     this.props.projectDetails(input);
-   }
+  //Search Box
+  handleSearch(search_item, e) {
+   this.setState ({search_item: e.target.value})
+  }
 
-   //Search Box
-   handleSearch(search_item, e) {
-     this.setState({ search_item: e.target.value })
-   }
+  handleGoClick() {
+   this.setState ({
+     activePage: 1,
+     filter_item: null,
+     search_item: this.state.search_item
+   }, () => {
+    this.props.projectDetails ({
+      page: this.state.activePage,
+      filter: this.state.filter_item,
+      search: this.state.search_item
+    });
+   });
+   window.scrollTo(0, 0);
+  }
 
-   handleGoClick() {
-     let input = {
-       page: 1,
-       filter: null,
-       search: this.state.search_item
-     };
-     this.props.projectDetails(input);
-   }
+  //Date filter
+  onFromDate = fromDate => this.setState({ fromDate })
+  onToDate = toDate => this.setState({ toDate })
 
 
   render() {
-    let project_details = [];
-    let user_details = (this.props.projectDetailsReducer && this.props.projectDetailsReducer.project_details) ? this.props.projectDetailsReducer.project_details.users : [];
-    for(var i = 0; i < user_details.length; i++) {
-      project_details = (this.props.projectDetailsReducer && this.props.projectDetailsReducer.project_details) ? this.props.projectDetailsReducer.project_details.users[i].projects : [];
-    }
-    let page_no = (user_details && user_details.length > 10) ? (user_details.length % 10) : 1 ;
-    console.log(user_details);
+    let user_details =
+    (this.props.projectDetailsReducer && this.props.projectDetailsReducer.project_details) ?
+    user_details = this.props.projectDetailsReducer.project_details.users : []
+    // let total_page = (user_details && user_details.length < 0) ? Math.round(user_details.length / 10) : 0 ;
+    // console.log(project_details);
     return (
       <div className="row">
         <div className="col-xs-12">
           <div className="box">
             <div className="box-header">
-              <h3 className="box-title">Project Allocation Details</h3>
+              <h3 className="box-title"><b>Project Allocation Details</b></h3>
               <div className="row">
                 <div className="col-md-6">
                   <div className="input-group margin">
-                    <input type="text" className="form-control" onChange={this.handleSearch.bind(this, "search_item")} value={this.state.search_item}/>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Search by Employee Name"
+                      onChange={this.handleSearch.bind(this, "search_item")}
+                      value={this.state.search_item}  />
                     <span className="input-group-btn">
-                      <button type="button" className="btn btn-info btn-flat" onClick={this.handleGoClick}>Go!</button>
+                      <button
+                        type="button"
+                        className="btn btn-info btn-flat"
+                        onClick={this.handleGoClick}
+                      >Go!</button>
                     </span>
                   </div>
                 </div>
-                <div className="col-md-6">
-                  <div className="margin">
-                    <div className="btn-group pull-right">
-                      <button type="button" className="btn btn-danger">Status Filter</button>
-                      <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                        <span className="caret"></span>
-                        <span className="sr-only">Toggle Dropdown</span>
-                      </button>
-                      <ul className="dropdown-menu" role="menu">
-                        <li><a href="#">Allocated Internally</a></li>
-                        <li><a href="#" onClick={this.filter.bind(this, "Allocated")}>Allocated</a></li>
-                        <li><a href="#" onClick={this.filter.bind(this, "Bench")}>Bench</a></li>
-                        <li className="divider"></li>
-                        <li><a href="#"onClick={this.filter.bind(this, null)}>Remove Filter</a></li>
-                      </ul>
-                    </div>
-                  </div>
+                <div className="col-md-5">
+                  <b style={{color: "#3c8dbc"}}>From Date (mm/dd/yyyy) </b>
+                  &emsp;
+                  <b style={{color: "#3c8dbc"}}>To Date (mm/dd/yyyy)</b>
+                  <br />
+                  <DatePicker
+                    onChange={this.onFromDate}
+                    value={this.state.fromDate}
+                  />&emsp;&emsp;
+                  <DatePicker
+                    onChange={this.onToDate}
+                    value={this.state.toDate}
+                  />
+                </div>
+                <div className="col-md-1">
+                  <Link to="/AssignProject" className="btn btn-app pull-right">
+                    <div style={{color: "#3c8dbc"}} className="fa fa-user-plus"></div>
+                    <p style={{color: "#3c8dbc"}}>Assign Project</p>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -117,9 +142,25 @@ class Project extends Component {
                     <th style={{width: "30px"}}>ID</th>
                     <th style={{width: "200px"}}>User</th>
                     <th style={{width: "200px"}}>Project Name</th>
+                    <th>
+                      <div className="btn-group">
+                        <button type="button" className="btn btn-default btn-sm bg-purple">
+                          <b>{ this.state.filter_item === null ? "Status" : this.state.filter_item }</b>
+                        </button>
+                        <button type="button" className="btn btn-default btn-sm bg-purple dropdown-toggle" data-toggle="dropdown">
+                          <span className="caret"></span>
+                        </button>
+                        <ul className="dropdown-menu" role="menu">
+                          <li><a onClick={this.filter.bind(this, null)}>Allocated Internally</a></li>
+                          <li><a onClick={this.filter.bind(this, "Allocated")}>Allocated</a></li>
+                          <li><a onClick={this.filter.bind(this, "Bench")}>Bench</a></li>
+                          <li className="divider"></li>
+                          <li><a onClick={this.filter.bind(this, null)}>Remove Filter</a></li>
+                        </ul>
+                      </div>
+                    </th>
                     <th style={{width: "90px"}}>From Date</th>
                     <th style={{width: "90px"}}>To Date</th>
-                    <th>Status</th>
                     <th style={{width: "200px"}}>Reporting Person</th>
                     <th style={{width: "100px"}}>Depertment</th>
                   </tr>
@@ -129,30 +170,31 @@ class Project extends Component {
                         <td>{values.emp_code}</td>
                         <td>{values.firstname} {values.lastname}</td>
                         <td>
-                          { project_details.map((values,key) => {
+                          { values.projects.map((values,key) => {
                               return (<p key={key}>{values.name}</p>)
-                          })}
-                        </td>
-                        <td>
-                          { project_details.map((values,key) => {
-                              return (<p key={key}>{values.start_date}</p>)
-                          })}
-                        </td>
-                        <td>
-                          { project_details.map((values,key) => {
-                              return (<p key={key}>{values.end_date}</p>)
                           })}
                         </td>
                         <td>
                           { values.user_status === "Allocated"
                             ?
-                            <span className="label label-primary">{values.user_status}</span>
+                            <span className="label label-success">{values.user_status}</span>
                             :
-                            <span className="label label-warning">Free</span>
+                            <span className="label label-warning">Bench</span>
                           }
                         </td>
                         <td>
-                          { project_details.map((values,key) => {
+                          { values.projects.map((values,key) => {
+                              return (<p key={key}>{values.start_date}</p>)
+                          })}
+                        </td>
+                        <td>
+                          { values.projects.map((values,key) => {
+                              return (<p key={key}>{values.end_date}</p>)
+                          })}
+                        </td>
+                        <td>
+                          { values.projects.map((values,key) => {
+                              return (<p key={key}>{values.reporting_person}</p>)
                           })}
                         </td>
                         <td>{values.department_name}</td>
@@ -164,52 +206,19 @@ class Project extends Component {
             </div>
             <div className="box-footer clearfix">
               <div className="row">
-                <div className="col-sm-5">
-                  <div>Showing 1 to {user_details.length >= 10 ? 10 : user_details.length} of {user_details.length} entries</div>
-                </div>
                 <div className="col-sm-7">
-                  <div>
-                    <ul className="pagination no-margin pull-right">
-                      { page_no > 1
-                        ?
-                        <li className="paginate_button previous">
-                          <a href="#" onClick={this.previousPage}>Previous</a>
-                        </li>
-                        :
-                        <li className="paginate_button previous disabled">
-                          <a href="#">Previous</a>
-                        </li>
-                      }
-                      { this.state.page = 1
-                        ?
-                        <li className="paginate_button active">
-                          <a href="#">1</a>
-                        </li>
-                        :
-                        <li className="paginate_button">
-                          <a href="#">1</a>
-                        </li>
-                      }
-                      { page_no > 1
-                        ?
-                        (<li className="paginate_button">
-                          <a href="#">{page_no}</a>
-                        </li>)
-                        :
-                        null
-                      }
-                      { page_no <= 1
-                        ?
-                        <li className="paginate_button next">
-                          <a href="#" onClick={this.nextPage}>Next</a>
-                        </li>
-                        :
-                        <li className="paginate_button next disabled">
-                          <a href="#">Next</a>
-                        </li>
-                      }
-                    </ul>
+                  <div style={{margin: "25px 0"}}>
+                    Showing 1 to {user_details.length >= 10 ? 10 : user_details.length} of {user_details.length} entries
                   </div>
+                </div>
+                <div className="col-sm-5">
+                  <Pagination
+                    hideDisabled
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={10}
+                    totalItemsCount={user_details.length}
+                    onChange={this.handlePageChange.bind(this)}
+                  />
                 </div>
               </div>
             </div>
