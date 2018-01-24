@@ -1,6 +1,6 @@
 import { PROJECT_DETAILS } from '../actions/Project';
 
-const INITIAL_STATE = { project_details: null };
+const INITIAL_STATE = { project_details: null , project_assign: null};
 
 const projectDetailsReducer = (state = {
   INITIAL_STATE
@@ -10,6 +10,11 @@ const projectDetailsReducer = (state = {
       return {
         ...state,
         project_details: action.payload
+      };
+    case "PROJECT_ASSIGN":
+      return {
+        ...state,
+        project_assign: action.payload
       };
     default:
       return state;

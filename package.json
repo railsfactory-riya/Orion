@@ -5,9 +5,7 @@
   "dependencies": {
     "js-cookie": "^2.2.0",
     "react": "^16.2.0",
-    "react-alert": "^3.1.1",
     "react-date-picker": "^6.7.0",
-    "react-datepicker": "^1.0.4",
     "react-dom": "^16.2.0",
     "react-js-pagination": "^3.0.0",
     "react-logger": "^1.1.0",

@@ -20,3 +20,20 @@ export function projectDetails(input) {
     })
   }
 }
+
+export function projectAssign(input) {
+  console.log("input",input);
+  let search_url = "projects?page="+input.page+"&query="+input.search+"&access_token=";
+  let url = null;
+  { input.search === null ? url = null : url = search_url }
+  return (dispatch) => {
+   dispatch({type: "PROJECT_ASSIGN"});
+   ApiCall.getApiCall(url)
+    .then((response) => {
+      dispatch({type: "PROJECT_ASSIGN", payload: response});
+    })
+    .catch((error) => {
+      dispatch({type: "PROJECT_ASSIGN", payload: error});
+    })
+  }
+}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DatePicker from 'react-date-picker';
 
-import { projectDetails } from '../../actions/Project';
+import { projectAssign } from '../../actions/Project';
 
 class AssignProject extends Component {
   constructor(props) {
@@ -52,7 +52,7 @@ class AssignProject extends Component {
       filter_item: null,
       search_item: e.target.value
     }, () => {
-     this.props.projectDetails ({
+     this.props.projectAssign ({
        page: this.state.activePage,
        filter: this.state.filter_item,
        search: this.state.search_item
@@ -97,9 +97,9 @@ class AssignProject extends Component {
 
   render() {
     let user_details =
-    (this.props.projectDetailsReducer && this.props.projectDetailsReducer.project_details) ?
-    user_details = this.props.projectDetailsReducer.project_details.users : []
-    // console.log("user_details",user_details);
+    (this.props.projectDetailsReducer && this.props.projectDetailsReducer.project_assign) ?
+    user_details = this.props.projectDetailsReducer.project_assign.users : []
+    console.log("user_details",user_details);
     return (
       <div className="row">
         <div className="col-xs-12">
@@ -151,9 +151,11 @@ class AssignProject extends Component {
                       { user_details.map((values,key) => {
                         return (
                           <li key={key}>
-                            <a onClick={this.searchDropdown.bind(this, values)}>
-                              {values.firstname} {values.lastname}
-                            </a>
+                            <div className="user-block" onClick={this.searchDropdown.bind(this, values)}>
+                              <img className="img-circle img-bordered-sm" src="dist/img/riya.jpg" alt="User" />
+                              <span className="username"><a>{values.firstname} {values.lastname}&emsp;</a></span>
+                              <span className="description">{values.department_name}</span>
+                            </div>
                           </li>
                         )
                       })}
@@ -275,8 +277,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    projectDetails: (user_details) => {
-      dispatch(projectDetails(user_details));
+    projectAssign: (user_details) => {
+      dispatch(projectAssign(user_details));
     }
   };
 };

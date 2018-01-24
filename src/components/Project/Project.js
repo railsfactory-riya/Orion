@@ -94,14 +94,13 @@ class Project extends Component {
         <div className="col-xs-12">
           <div className="box">
             <div className="box-header">
-              <h3 className="box-title"><b>Project Allocation Details</b></h3>
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <div className="input-group margin">
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Search by Employee Name"
+                      placeholder="Search Employee ..."
                       onChange={this.handleSearch.bind(this, "search_item")}
                       value={this.state.search_item}  />
                     <span className="input-group-btn">
@@ -113,7 +112,7 @@ class Project extends Component {
                     </span>
                   </div>
                 </div>
-                <div className="col-md-5">
+                <div className="col-md-7">
                   <b style={{color: "#3c8dbc"}}>From Date (mm/dd/yyyy) </b>
                   &emsp;
                   <b style={{color: "#3c8dbc"}}>To Date (mm/dd/yyyy)</b>
@@ -134,18 +133,16 @@ class Project extends Component {
                   </Link>
                 </div>
               </div>
+              <h3 className="box-title"><b>Project Allocation Details</b></h3>
             </div>
             <div className="box-body table-responsive no-padding">
               <table className="table table-bordered">
                 <tbody>
                   <tr>
-                    <th style={{width: "30px"}}>ID</th>
-                    <th style={{width: "200px"}}>User</th>
-                    <th style={{width: "200px"}}>Project Name</th>
                     <th>
                       <div className="btn-group">
                         <button type="button" className="btn btn-default btn-sm bg-purple">
-                          <b>{ this.state.filter_item === null ? "Status" : this.state.filter_item }</b>
+                          <b>{this.state.filter_item === null ? "Status" : this.state.filter_item}</b>
                         </button>
                         <button type="button" className="btn btn-default btn-sm bg-purple dropdown-toggle" data-toggle="dropdown">
                           <span className="caret"></span>
@@ -159,6 +156,9 @@ class Project extends Component {
                         </ul>
                       </div>
                     </th>
+                    <th style={{width: "30px"}}>ID</th>
+                    <th style={{width: "200px"}}>User</th>
+                    <th style={{width: "200px"}}>Project Name</th>
                     <th style={{width: "90px"}}>From Date</th>
                     <th style={{width: "90px"}}>To Date</th>
                     <th style={{width: "200px"}}>Reporting Person</th>
@@ -167,13 +167,6 @@ class Project extends Component {
                   { user_details.map((values,key) => {
                     return (
                       <tr key={key}>
-                        <td>{values.emp_code}</td>
-                        <td>{values.firstname} {values.lastname}</td>
-                        <td>
-                          { values.projects.map((values,key) => {
-                              return (<p key={key}>{values.name}</p>)
-                          })}
-                        </td>
                         <td>
                           { values.user_status === "Allocated"
                             ?
@@ -181,6 +174,13 @@ class Project extends Component {
                             :
                             <span className="label label-warning">Bench</span>
                           }
+                        </td>
+                        <td>{values.emp_code}</td>
+                        <td>{values.firstname} {values.lastname}</td>
+                        <td>
+                          { values.projects.map((values,key) => {
+                              return (<p key={key}>{values.name}</p>)
+                          })}
                         </td>
                         <td>
                           { values.projects.map((values,key) => {

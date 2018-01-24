@@ -25,27 +25,35 @@ class Signin extends Component {
     this.setState({fields});
   }
 
-  //Submit input
+  //Sign in
   onSignin() {
     const {loginDetails} = this.props;
     loginDetails({
       username: this.state.fields.username,
       password: this.state.fields.password
     })
-    console.log(this.props.sessionReducer);
+  }
+
+  failSignin() {
+     alert("Wrong user details");
+     window.location.replace('/Signin');
+  }
+
+  successSignin() {
     if(this.props.sessionReducer && this.props.sessionReducer.data) {
-      if(this.props.sessionReducer.data.msg==="success") {
-         Cookies.set('Token', this.props.sessionReducer.data.access_token, { expires: 15 });
-         Cookies.set('ID', this.props.sessionReducer.data.id, { expires: 15 });
-         window.location.replace('/Dashboard');
-       }
-       else if(this.props.sessionReducer.data.msg==="failure") {
-         window.location.replace('/Signin');
-       }
-     }
+      if(this.props.sessionReducer.data.msg === "success") {
+        Cookies.set('Token', this.props.sessionReducer.data.access_token, { expires: 15 });
+        Cookies.set('ID', this.props.sessionReducer.data.id, { expires: 15 });
+        window.location.replace('/Dashboard');
+      }
+    }
   }
 
   render() {
+    let session_details =
+    (this.props.sessionReducer && this.props.sessionReducer.data) ?
+    session_details = this.props.sessionReducer.data.msg : []
+    {session_details === "failure" ? this.failSignin() : this.successSignin() }
     return (
       <div className="login-box">
         <div className="login-logo">
