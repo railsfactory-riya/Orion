@@ -7,15 +7,12 @@ import { projectDetails } from '../../actions/Project';
 
 class AssignProject extends Component {
   constructor(props) {
-    let to_date = new Date().setDate(new Date().getDate() + 1)
     super(props);
     this.state = {
       fields: {
-        empid: '',
         empname: '',
         projectname: '',
         reportingperson: '',
-        empdepertment: '',
         empstatus: 'Allocated'
       },
       filter_item: null,
@@ -24,47 +21,7 @@ class AssignProject extends Component {
       fromDate: new Date(),
       toDate: new Date()
     };
-    this.handleGoClick = this.handleGoClick.bind(this);
-  }
-
-  // componentWillMount() {
-  //   let input = {
-  //     page: this.state.activePage,
-  //     filter: this.state.filter_item,
-  //     search: null
-  //   };
-  //   this.props.projectDetails(input);
-  // }
-
-   //Filter
-  filter(value) {
-   this.setState ({filter_item: value}, () => {
-    this.props.projectDetails ({
-      page: this.state.activePage,
-      filter: this.state.filter_item,
-      search: null
-    });
-   });
-  }
-
-  //Search Box
-  handleSearch(search_item, e) {
-   this.setState ({search_item: e.target.value})
-  }
-
-  handleGoClick() {
-   this.setState ({
-     activePage: 1,
-     filter_item: null,
-     search_item: this.state.search_item
-   }, () => {
-    this.props.projectDetails ({
-      page: this.state.activePage,
-      filter: this.state.filter_item,
-      search: this.state.search_item
-    });
-   });
-   window.scrollTo(0, 0);
+    this.onClear = this.onClear.bind(this);
   }
 
   //Date filter
@@ -72,13 +29,17 @@ class AssignProject extends Component {
     this.setState({ fromDate });
     console.log(fromDate);
   }
-  onToDate = toDate => this.setState({ toDate })
+
+  onToDate(toDate) {
+    this.setState({ toDate });
+    console.log(toDate);
+  }
 
   //Input change
   onChange(field, e) {
     let fields = this.state.fields;
     fields[field] = e.target.value;
-    this.setState({fields});
+    this.setState ({fields});
     console.log(fields);
   }
 
@@ -99,12 +60,46 @@ class AssignProject extends Component {
     });
   }
 
+  //Search Dropdown
+  searchDropdown(value) {
+    this.setState ({
+      fields: {
+        empid: value.emp_code,
+        empfirstname: value.firstname,
+        emplastname: value.lastname,
+        empdepertment: value.department_name,
+        empname: (value.firstname).concat(" ").concat(value.lastname)
+      }
+    })
+  }
+
+  //Clear Input
+  onClear() {
+    this.setState ({
+      fields: {
+        empname: '',
+        projectname: '',
+        reportingperson: '',
+        empstatus: 'Allocated',
+        empid: '',
+        empfirstname: '',
+        emplastname: '',
+        empdepertment: ''
+      },
+      filter_item: null,
+      search_item: '',
+      activePage: 1,
+      fromDate: new Date(),
+      toDate: new Date()
+    })
+  }
+
 
   render() {
     let user_details =
     (this.props.projectDetailsReducer && this.props.projectDetailsReducer.project_details) ?
     user_details = this.props.projectDetailsReducer.project_details.users : []
-    console.log(user_details[0]);
+    // console.log("user_details",user_details);
     return (
       <div className="row">
         <div className="col-xs-12">
@@ -116,75 +111,105 @@ class AssignProject extends Component {
               <div className="row">
                 <div className="col-xs-6">
                   <div className="input-group">
-                    <span style={{color: "#3c8dbc"}} className="input-group-addon">@</span>
-                    { !user_details[0]
+                    <span style={{color: "#3c8dbc"}} className="input-group-addon"><b>@</b></span>
+                    { user_details.length <= 0
                       ?
                       <input
-                        type="number"
+                        readOnly
                         className="form-control"
                         placeholder="Employee ID"
-                        value={this.state.fields["empid"]}
-                        onChange={this.onChange.bind(this, "empid")}
                        />
                        :
-                       <input
-                         type="number"
-                         className="form-control"
-                         placeholder="Employee ID"
-                         value={user_details[0].emp_code}
-                         onChange={this.onChange.bind(this, "empid")}
-                        />
+                       <div className="form-control">
+                         {this.state.fields["empid"]}
+                       </div>
                       }
                   </div>
                   <br />
                   <div className="input-group">
                     <span style={{color: "#3c8dbc"}} className="input-group-addon"><i className="fa fa-user"></i></span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Employee Name"
-                      value={this.state.fields["empname"]}
-                      onChange={this.handleSearch.bind(this, "empname")}
-                    />
+                    { user_details.length <= 0 ?
+                      <input
+                        type="text"
+                        className="form-control dropdown-toggle"
+                        data-toggle="dropdown"
+                        placeholder="Employee Name"
+                        value={this.state.fields["empname"]}
+                        onChange={this.handleSearch.bind(this, "empname")}
+                      />
+                      :
+                      <input
+                        type="text"
+                        className="form-control dropdown-toggle"
+                        data-toggle="dropdown"
+                        placeholder="Search Employee Again ..."
+                        value={this.state.fields["empname"]}
+                        onChange={this.handleSearch.bind(this, "empname")}
+                      />
+                    }
+                    <ul className="dropdown-menu" role="menu">
+                      { user_details.map((values,key) => {
+                        return (
+                          <li key={key}>
+                            <a onClick={this.searchDropdown.bind(this, values)}>
+                              {values.firstname} {values.lastname}
+                            </a>
+                          </li>
+                        )
+                      })}
+                    </ul>
                   </div>
                   <br />
                   <div className="input-group">
                     <span style={{color: "#3c8dbc"}} className="input-group-addon"><i className="fa fa-briefcase"></i></span>
+                    { user_details.length <= 0 ?
                     <input
-                      type="text"
+                      readOnly
                       className="form-control"
                       placeholder="Project Name"
-                      value={this.state.fields["projectname"]}
-                      onChange={this.onChange.bind(this, "projectname")}
                      />
+                     :
+                     <input
+                       type="text"
+                       className="form-control"
+                       placeholder="Project Name"
+                       value={this.state.fields["projectname"]}
+                       onChange={this.onChange.bind(this, "projectname")}
+                      />
+                   }
                   </div>
                   <br />
                   <div className="input-group">
                     <span style={{color: "#3c8dbc"}} className="input-group-addon"><i className="fa fa-male"></i></span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Reporting Person"
-                      value={this.state.fields["reportingperson"]}
-                      onChange={this.onChange.bind(this, "reportingperson")}
-                    />
+                    { user_details.length <= 0 ?
+                      <input
+                        readOnly
+                        className="form-control"
+                        placeholder="Reporting Person"
+                      />
+                      :
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Reporting Person"
+                        value={this.state.fields["reportingperson"]}
+                        onChange={this.onChange.bind(this, "reportingperson")}
+                      />
+                    }
                   </div>
                   <br />
                   <div className="input-group">
                     <span style={{color: "#3c8dbc"}} className="input-group-addon"><i className="fa fa-desktop"></i></span>
-                    { !user_details[0]
+                    { user_details.length <= 0
                       ?
                       <input
                         readOnly
-                        type="text"
                         className="form-control"
                         placeholder="Depertment"
-                        value={this.state.fields["empdepertment"]}
-                        onChange={this.onChange.bind(this, "empdepertment")}
                       />
                       :
                       <div className="form-control">
-                        {user_details[0].department_name}
+                        {this.state.fields["empdepertment"]}
                       </div>
                     }
                   </div>
@@ -225,10 +250,12 @@ class AssignProject extends Component {
             </div>
             <div className="box-footer">
               <div className="row">
-                <div className="col-xs-6">
-                  <button type="submit" className="btn btn-warning pull-right"><b>Cancel</b></button>
+                <div className="col-xs-3">
+                  <button type="button" className="btn btn-warning pull-right" onClick={this.onClear}>
+                    <b>Cancel</b>
+                  </button>
                 </div>
-                <div className="col-xs-6">
+                <div className="col-xs-9">
                   <button type="submit" className="btn btn-info"><b>Sign in</b></button>
                 </div>
               </div>
