@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
+import ReactSvgPieChart  from 'react-svg-piechart';
 
 export class Leave extends Component {
   render() {
+    const data = [
+      {title: "Leave Balance", value: 100, color: "#22594e"},
+      {title: "Carry Forward Leave", value: 60, color: "#2f7d6d"},
+      {title: "This Quater Leave", value: 30, color: "#3da18d"},
+      {title: "Leave Approved", value: 20, color: "#69c2b0"},
+      {title: "Leave On LOP", value: 10, color: "#a1d9ce"},
+    ]
+
     return (
       <div>
         <section className="content-header">
@@ -33,12 +42,24 @@ export class Leave extends Component {
             <div className="col-md-9">
               <div className="nav-tabs-custom">
                 <ul className="nav nav-tabs">
-                  <li className="active"><a href="#ls" data-toggle="tab">Leave Summary</a></li>
+                  <li className="active"><a href="#lc" data-toggle="tab">Leave Pie Chart</a></li>
+                  <li><a href="#ls" data-toggle="tab">Leave Summary</a></li>
                   <li><a href="#tls" data-toggle="tab">Total Leave Summary</a></li>
-                  <li><a href="#hol" data-toggle="tab">History of Leave</a></li>
                 </ul>
                 <div className="tab-content">
-                  <div className="active tab-pane" id="ls">
+                  <div className="active tab-pane" id="lc">
+                    <ReactSvgPieChart
+                      data={data}
+                      expandOnHover={true}
+                      expandSize={2}
+                      shrinkOnTouchEnd={false}
+                      strokeColor="#fff"
+                      strokeLinejoin="round"
+                      strokeWidth={0.5}
+                      viewBoxSize={50}
+                    />
+                  </div>
+                  <div className="tab-pane" id="ls">
                     <table className="table table-bordered">
                       <tbody>
                         <tr>
@@ -113,9 +134,6 @@ export class Leave extends Component {
                         </tr>
                       </tbody>
                     </table>
-                  </div>
-                  <div className="tab-pane" id="hol">
-                    <p>No leave history.</p>
                   </div>
                 </div>
               </div>
