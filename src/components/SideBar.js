@@ -46,8 +46,12 @@ class SideBar extends Component {
               </Link>
             </li>
             <li>
-              <Link to="/Holiday">
-                <i className="fa fa-calendar"></i> <span> Holiday Calendar</span>
+              <Link to="/AboutConpany">
+                <i className="fa fa-industry"></i>
+                <span> About Company</span>
+                <span className="pull-right-container">
+                  <span className="label label-primary pull-right">2</span>
+                </span>
               </Link>
             </li>
             <li className="treeview">
