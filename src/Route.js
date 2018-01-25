@@ -1,21 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { DashBoard } from './components/DashBoard/DashBoard';
-import EmployeeDetails from './components/EmployeeInfo/EmployeeDetails';
-import SingleEmployee from './components/EmployeeInfo/SingleEmployee';
-import { Policies } from './components/HRManagement/Policies';
-import { Announcements } from './components/HRManagement/Announcements';
-import PersonalDetails from './components/MyPage/PersonalDetails';
-import ProfessionalDetails from './components/MyPage/ProfessionalDetails';
-import { ContactDetails } from './components/MyPage/ContactDetails';
-import Skills from './components/MyPage/Skills';
-import { Certificates } from './components/MyPage/Certificates';
-import { Leave } from './components/MyPage/Leave';
-import { MyAllocation } from './components/MyPage/MyAllocation';
-import Project from './components/Project/Project';
-import AssignProject from './components/Project/AssignProject';
-import { AboutConpany } from './components/AboutConpany';
+import { Error404 } from './components/Error/Error404';
 
 
 // function requireAuth(nextState, replace) {
@@ -27,22 +13,7 @@ import { AboutConpany } from './components/AboutConpany';
 function ContentAreaRoute(props) {
   return (
     <div>
-      <Route exact path='/' render={() => (<Redirect to='/Dashboard' />)} />
-      <Route path={'/Dashboard'} component={DashBoard} />
-      <Route path={'/EmployeeDetails'} component={EmployeeDetails} />
-      <Route path={'/SingleEmployee'} component={SingleEmployee} />
-      <Route path={'/Policies'}  component={Policies} />
-      <Route path={'/Announcements'}  component={Announcements} />
-      <Route path={'/PersonalDetails'} component={PersonalDetails} />
-      <Route path={'/ProfessionalDetails'} component={ProfessionalDetails} />
-      <Route path={'/ContactDetails'} component={ContactDetails} />
-      <Route path={'/Skills'} component={Skills} />
-      <Route path={'/Certificates'} component={Certificates} />
-      <Route path={'/Leave'} component={Leave} />
-      <Route path={'/MyAllocation'} component={MyAllocation} />
-      <Route path={'/Project'} component={Project} />
-      <Route path={'/AssignProject'} component={AssignProject} />
-      <Route path={'/AboutConpany'} component={AboutConpany} />
+      <Route path={'/Error404'} component={Error404} />
     </div>
   )
 };

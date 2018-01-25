@@ -15,7 +15,7 @@ export class Application extends Component {
       <Provider store={store}>
         <Router>
           <div>
-            {console.log('Token', Cookies.get('Token'))}
+            {console.log('Login Token', Cookies.get('Token'))}
             { (Cookies.get('Token'))
               ?
               (<Route path={'/'} component={App} />)

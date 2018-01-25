@@ -25,7 +25,7 @@ class SideBar extends Component {
             </div>
             <div className="pull-left info">
               <p>{personal_details.firstname} {personal_details.lastname}</p>
-              <a href="#"><i className="fa fa-circle text-success"></i> Online</a>
+              <a href="#"><i className="fa fa-circle text-success"></i> Signed In</a>
             </div>
           </div>
           <form action="#" method="get" className="sidebar-form">
