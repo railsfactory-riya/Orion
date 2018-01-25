@@ -15,7 +15,7 @@ import { Leave } from './components/MyPage/Leave';
 import { MyAllocation } from './components/MyPage/MyAllocation';
 import Project from './components/Project/Project';
 import AssignProject from './components/Project/AssignProject';
-import { Holiday } from './components/Holiday';
+import { AboutConpany } from './components/AboutConpany';
 
 
 // function requireAuth(nextState, replace) {
@@ -27,7 +27,7 @@ import { Holiday } from './components/Holiday';
 function ContentAreaRoute(props) {
   return (
     <div>
-      <Route exact path="/" render={() => (<Redirect to="/Dashboard" />)} />
+      <Route exact path='/' render={() => (<Redirect to='/Dashboard' />)} />
       <Route path={'/Dashboard'} component={DashBoard} />
       <Route path={'/EmployeeDetails'} component={EmployeeDetails} />
       <Route path={'/SingleEmployee'} component={SingleEmployee} />
@@ -42,7 +42,7 @@ function ContentAreaRoute(props) {
       <Route path={'/MyAllocation'} component={MyAllocation} />
       <Route path={'/Project'} component={Project} />
       <Route path={'/AssignProject'} component={AssignProject} />
-      <Route path={'/Holiday'} component={Holiday} />
+      <Route path={'/AboutConpany'} component={AboutConpany} />
     </div>
   )
 };
