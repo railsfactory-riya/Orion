@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-import { App } from './App';
+import App from './App';
 import Session from './components/Session/Session';
 import store from './store';
 

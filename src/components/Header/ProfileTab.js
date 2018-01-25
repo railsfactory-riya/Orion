@@ -7,17 +7,13 @@ import { personalDetails } from '../../actions/User';
 
 
 class ProfileTab extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
-
   componentWillMount() {
     this.props.personalDetails()
   }
 
    render() {
-    let personal_details = (this.props.userDetailsReducer && this.props.userDetailsReducer.personal_details) ? this.props.userDetailsReducer.personal_details.user : [];
+    let personal_details = (this.props.userDetailsReducer && this.props.userDetailsReducer.personal_details) ?
+    this.props.userDetailsReducer.personal_details.user : [];
     return (
       <li className="dropdown user user-menu">
         <a href="/" className="dropdown-toggle" data-toggle="dropdown">

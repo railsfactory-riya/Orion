@@ -7,11 +7,6 @@ import { personalDetails } from '../../actions/User';
 
 
 class PersonalDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
-
   componentWillMount() {
     this.props.personalDetails()
    }

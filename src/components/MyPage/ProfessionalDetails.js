@@ -5,11 +5,6 @@ import PageLoading from '../PageLoading';
 import { professionalDetails } from '../../actions/User';
 
 class ProfessionalDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
-
   componentWillMount() {
     this.props.professionalDetails()
    }

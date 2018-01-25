@@ -4,11 +4,6 @@ import { connect } from 'react-redux';
 import { otherDetails } from '../../actions/User';
 
 class Skills extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
-
   componentWillMount() {
     this.props.otherDetails()
    }
