@@ -12,7 +12,7 @@ import { ContactDetails } from './MyPage/ContactDetails';
 import Skills from './MyPage/Skills';
 import { Certificates } from './MyPage/Certificates';
 import { Leave } from './MyPage/Leave';
-import { MyAllocation } from './MyPage/MyAllocation';
+import MyAllocation from './MyPage/MyAllocation';
 import Project from './Project/Project';
 import AssignProject from './Project/AssignProject';
 import { AboutConpany } from './AboutConpany';

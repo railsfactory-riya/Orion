@@ -8,7 +8,7 @@ import { personalDetails } from '../../actions/User';
 
 class ProfileTab extends Component {
   componentWillMount() {
-    this.props.personalDetails()
+    this.props.personalDetails();
   }
 
    render() {

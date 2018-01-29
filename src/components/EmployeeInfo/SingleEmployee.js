@@ -51,7 +51,7 @@ class SingleEmployee extends Component {
                   <div className="col-sm-4">
                     <div className="description-block">
                       <h5 className="description-header">{signle_emp_details.no_of_projects}</h5>
-                      <span className="description-text">Prijects</span>
+                      <span className="description-text">Projects</span>
                     </div>
                   </div>
                 </div>
