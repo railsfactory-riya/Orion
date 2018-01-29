@@ -90,7 +90,7 @@ class Project extends Component {
     user_details = this.props.projectDetailsReducer.project_details.users : []
     return (
       <div className="row">
-        { user_details.length <=0 ?
+        { user_details.length <= 0 ?
           <PageLoading />
           :
           <div className="col-xs-12">

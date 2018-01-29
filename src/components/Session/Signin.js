@@ -14,12 +14,15 @@ class Signin extends Component {
       fields: {
         username: '',
         password: ''
-      }
+      },
+      errors: {},
+      formIsValid : true
     }
   }
 
   //Input change
   onChange(field, e) {
+    this.state.errors = {};
     let fields = this.state.fields;
     fields[field] = e.target.value;
     this.setState({fields});
@@ -27,6 +30,15 @@ class Signin extends Component {
 
   //Sign in
   onSignin() {
+    this.state.formIsValid = true;
+    if(!this.state.fields["username"]) {
+      this.state.errors["username"] = "Username is required";
+      this.state.formIsValid = false;
+    }
+    if(!this.state.fields["password"]) {
+      this.state.errors["password"] = "Password is required";
+      this.state.formIsValid = false;
+    }
     const {loginDetails} = this.props;
     loginDetails({
       username: this.state.fields.username,
@@ -35,8 +47,11 @@ class Signin extends Component {
   }
 
   failSignin() {
-     alert("Wrong user details");
-     window.location.replace('/Signin');
+    if(this.state.fields["username"] && this.state.fields["password"] && this.state.formIsValid) {
+      this.state.errors["username"] = "";
+      this.state.errors["password"] = "";
+      this.state.errors["inputs"] = "Wrong user details";
+    }
   }
 
   successSignin() {
@@ -44,6 +59,7 @@ class Signin extends Component {
       if(this.props.sessionReducer.data.msg === "success") {
         Cookies.set('Token', this.props.sessionReducer.data.access_token, { expires: 15 });
         Cookies.set('ID', this.props.sessionReducer.data.id, { expires: 15 });
+        this.state.errors = "";
         window.location.replace('/Dashboard');
       }
     }
@@ -69,6 +85,7 @@ class Signin extends Component {
               onChange={this.onChange.bind(this, "username")}
             />
             <span className="glyphicon glyphicon-user form-control-feedback"></span>
+            <span style={{color: "red"}}>{this.state.errors["username"]}</span>
           </div>
           <div className="form-group has-feedback">
             <input
@@ -79,9 +96,11 @@ class Signin extends Component {
               onChange={this.onChange.bind(this, "password")}
              />
             <span className="glyphicon glyphicon-lock form-control-feedback"></span>
+            <span style={{color: "red"}}>{this.state.errors["password"]}</span>
           </div>
           <div className="row">
             <div className="col-xs-12">
+              <span style={{color: "red"}}>{this.state.errors["inputs"]}</span>
               <button type="submit" className="btn btn-primary btn-flat pull-right" onClick={this.onSignin.bind(this)} >Sign In</button>
             </div>
           </div>
@@ -100,8 +119,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginDetails: (login_details, loggedIn, error, data) => {
-      dispatch(loginDetails(login_details, loggedIn, error, data));
+    loginDetails: (login_details, loggedIn, errors, data) => {
+      dispatch(loginDetails(login_details, loggedIn, errors, data));
     }
   };
 };

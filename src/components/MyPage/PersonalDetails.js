@@ -17,7 +17,7 @@ class PersonalDetails extends Component {
     this.props.userDetailsReducer.personal_details.user : [];
     return (
       <div>
-        { personal_details.length <=0 ?
+        { personal_details.length <= 0 ?
           <PageLoading />
           :
           <div>
@@ -56,7 +56,7 @@ class PersonalDetails extends Component {
                        <div className="col-sm-4">
                          <div className="description-block">
                            <h5 className="description-header">{personal_details.no_of_projects}</h5>
-                           <span className="description-text">Prijects</span>
+                           <span className="description-text">Projects</span>
                          </div>
                        </div>
                      </div>

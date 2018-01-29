@@ -6,8 +6,7 @@ function Footer() {
         © 2006 - 2018 RailsFactory [Reg:
         <a href="https://sedintechnologies.com/" target="_blank">
           &nbsp;Sedin Technologies Private Limited&nbsp;
-        </a>
-          ]
+        </a>]
       </footer>
     )
 }
