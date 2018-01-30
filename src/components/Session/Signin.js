@@ -22,7 +22,7 @@ class Signin extends Component {
 
   //Input change
   onChange(field, e) {
-    this.state.errors = {};
+    this.state.errors["inputs"] = '';
     let fields = this.state.fields;
     fields[field] = e.target.value;
     this.setState({fields});
@@ -77,30 +77,63 @@ class Signin extends Component {
         </div>
         <div className="login-box-body">
           <p className="login-box-msg">Sign in to start your session</p>
-          <div className="form-group has-feedback">
-            <input
-              className="form-control"
-              placeholder="Username"
-              value={this.state.fields["username"]}
-              onChange={this.onChange.bind(this, "username")}
-            />
-            <span className="glyphicon glyphicon-user form-control-feedback"></span>
-            <span style={{color: "red"}}>{this.state.errors["username"]}</span>
-          </div>
-          <div className="form-group has-feedback">
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Password"
-              value={this.state.fields["password"]}
-              onChange={this.onChange.bind(this, "password")}
-             />
-            <span className="glyphicon glyphicon-lock form-control-feedback"></span>
-            <span style={{color: "red"}}>{this.state.errors["password"]}</span>
-          </div>
+          { !this.state.errors["username"] ?
+            <div className="form-group has-feedback">
+              <input
+                className="form-control"
+                placeholder="Enter Username ..."
+                value={this.state.fields["username"]}
+                onChange={this.onChange.bind(this, "username")}
+              />
+              <span className="glyphicon glyphicon-user form-control-feedback"></span>
+              <span style={{color: "red"}}>{this.state.errors["username"]}</span>
+            </div>
+            :
+            <div className="form-group has-warning">
+              <label className="control-label" htmlFor="inputWarning"><i className="fa fa-bell-o"></i> Input with warning</label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputWarning"
+                placeholder="Enter Username ..."
+                value={this.state.fields["username"]}
+                onChange={this.onChange.bind(this, "username")}
+              />
+              <span className="help-block">Username is required</span>
+            </div>
+          }
+          { !this.state.errors["password"] ?
+            <div className="form-group has-feedback">
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter Password ..."
+                value={this.state.fields["password"]}
+                onChange={this.onChange.bind(this, "password")}
+               />
+              <span className="glyphicon glyphicon-lock form-control-feedback"></span>
+              <span style={{color: "red"}}>{this.state.errors["password"]}</span>
+            </div>
+            :
+            <div className="form-group has-warning">
+              <label className="control-label" htmlFor="inputWarning"><i className="fa fa-bell-o"></i> Input with warning</label>
+              <input
+                type="password"
+                className="form-control"
+                id="inputWarning"
+                placeholder="Enter Password ..."
+                value={this.state.fields["password"]}
+                onChange={this.onChange.bind(this, "password")}
+              />
+              <span className="help-block">Password is required</span>
+            </div>
+          }
           <div className="row">
             <div className="col-xs-12">
-              <span style={{color: "red"}}>{this.state.errors["inputs"]}</span>
+              <label className="control-label" htmlFor="inputError">
+                {this.state.errors["inputs"] ?
+                <i className="fa fa-times-circle-o"></i> : null} {this.state.errors["inputs"]}
+              </label>
               <button type="submit" className="btn btn-primary btn-flat pull-right" onClick={this.onSignin.bind(this)} >Sign In</button>
             </div>
           </div>
