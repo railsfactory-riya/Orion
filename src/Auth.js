@@ -9,9 +9,6 @@ const RequireAuth = (Component) => {
     componentWillMount() {
       let token = Cookies.get('Token');
       console.log('Token',token);
-      // if(token) {
-      //   this.props.history.replace({pathname: '/', component: {App}});
-      // }
     }
     render() {
       return <Component {...this.props} />

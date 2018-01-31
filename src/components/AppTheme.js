@@ -13,7 +13,7 @@ class AppTheme extends Component {
   render() {
     return (
       <aside className="control-sidebar control-sidebar-dark">
-        <h4 className="control-sidebar-heading">Theme</h4>
+        <h4 className="control-sidebar-heading">&emsp;Change Your Theme</h4>
         <ul className="list-unstyled clearfix">
           <li style={{float:"left", width: "33.33333%", padding: "5px"}} onClick={this.handleThemeChange.bind(this, "Purple")}>
             <a href="javascript:void(0)" data-skin="skin-purple" style={{display: "block", boxShadow: "0 0 3px rgba(0,0,0,0.4)"}} className="clearfix full-opacity-hover">

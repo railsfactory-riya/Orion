@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import Cookies from 'js-cookie';
 
 import SideBar from './components/SideBar';
 import Footer from './components/Footer';
@@ -14,12 +15,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      theme: "skin-purple"
+      theme: Cookies.get('theme')
     }
   }
 
   changeTheme = (themeValue) => {
     this.setState({theme: themeValue});
+    Cookies.set('theme', themeValue);
   }
 
   componentWillMount() {
@@ -27,6 +29,7 @@ class App extends Component {
   }
 
   render() {
+    let classTheme = (Cookies.get('theme')) ? this.state.theme : "skin-purple" ;
     let personal_details = (this.props.userDetailsReducer && this.props.userDetailsReducer.personal_details) ?
     this.props.userDetailsReducer.personal_details.user : [];
     return (
@@ -34,7 +37,7 @@ class App extends Component {
         { !personal_details ?
           <Error500 />
           :
-          <div className={this.state.theme} style={{position: "relative"}}>
+          <div className={classTheme} style={{position: "relative"}}>
             <Header />
             <SideBar />
             <ContentArea />
