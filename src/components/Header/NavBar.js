@@ -12,6 +12,9 @@ function NavBar() {
         <ul className="nav navbar-nav">
           <ProfileTab />
           <ChangePassword />
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i className="fa fa-gears"></i></a>
+          </li>
         </ul>
       </div>
     </nav>

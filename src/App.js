@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import SideBar from './components/SideBar';
 import Footer from './components/Footer';
+import AppTheme from './components/AppTheme';
 import Header from './components/Header/Header';
 import ContentArea from './components/ContentArea';
 import Error500 from './components/Error/Error500';
@@ -10,6 +11,17 @@ import { personalDetails } from './actions/User';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      theme: "skin-purple"
+    }
+  }
+
+  changeTheme = (themeValue) => {
+    this.setState({theme: themeValue});
+  }
+
   componentWillMount() {
     this.props.personalDetails()
   }
@@ -22,11 +34,12 @@ class App extends Component {
         { !personal_details ?
           <Error500 />
           :
-          <div className="skin-purple" style={{position: "relative"}}>
+          <div className={this.state.theme} style={{position: "relative"}}>
             <Header />
             <SideBar />
             <ContentArea />
             <Footer />
+            <AppTheme onchangeTheme={this.changeTheme} />
           </div>
         }
       </div>

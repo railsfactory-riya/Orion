@@ -130,7 +130,7 @@ class Signin extends Component {
           }
           <div className="row">
             <div className="col-xs-12">
-              <label className="control-label" htmlFor="inputError">
+              <label className="control-label" htmlFor="inputError" style={{color: "red"}}>
                 {this.state.errors["inputs"] ?
                 <i className="fa fa-times-circle-o"></i> : null} {this.state.errors["inputs"]}
               </label>

@@ -15,7 +15,8 @@ class SideBar extends Component {
     this.props.personalDetails()
   }
   render() {
-    let personal_details = (this.props.userDetailsReducer && this.props.userDetailsReducer.personal_details) ? this.props.userDetailsReducer.personal_details.user : [];
+    let personal_details = (this.props.userDetailsReducer && this.props.userDetailsReducer.personal_details) ?
+    this.props.userDetailsReducer.personal_details.user : [];
     return (
       <aside className="main-sidebar" style={{bottom: "0 !important"}}>
         <section className="sidebar" style={{height: "auto"}}>
