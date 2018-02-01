@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
-import { browserHistory } from 'react-router';
 
 import { loginDetails } from '../../actions/Session';
 import { App } from '../../App';
